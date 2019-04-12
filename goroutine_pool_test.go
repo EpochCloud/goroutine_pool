@@ -19,7 +19,8 @@ func Test_m(t *testing.T){
 		t.Error("work is null")
 	}
 	work.NewPool(t1)
-	work.Do(do1).Put()
+	work.Do(do1).
+		Put()
 	result :=<- t1
 	if result <= 0 {
 		t.Error("do is null")
