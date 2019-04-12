@@ -1,9 +1,8 @@
-package main
+package goroutine_pool
 
 import (
 	"sync"
 )
-
 type (
 	Fn   func(...interface{}) interface{}
 	Work struct {
@@ -40,13 +39,15 @@ func (w *Work) makePool(args interface{}) {
 }
 
 //Back into that the pool
-func (w *Work) Put(args ...interface{}) {
+func (w *Work) Put(args ...interface{})*Work {
 	w.makePool(args)
+	return w
 }
 
 //Execute Call
-func (w *Work) Do(f Fn) {
+func (w *Work) Do(f Fn)*Work {
 	w.TaskCh <- f
+	return w
 }
 
 //Shut down the goroutine pool
